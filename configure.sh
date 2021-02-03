@@ -10,7 +10,7 @@ ln -s $HOME/dotfiles/.config/nvim $HOME/.config
 # Brew? Conda?
 
 # MINIMAL
-# neovim
+# neovim + language server dependencies
 # cmake
 # autotools
 # bash
