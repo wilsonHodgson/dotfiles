@@ -81,6 +81,7 @@ let g:seoul256_background = 235
 colo seoul256
 set bs=1
 set number
+set mouse=a
 set termguicolors
 set hidden
 set nobackup
@@ -92,6 +93,14 @@ set foldmethod=marker
 
 set spelllang=en
 set spell
+
+"Fuzzy Filefinding in root
+set path+=**
+set wildmenu
+
+"Tag Building
+command! MakeTags !ctags -R
+
 "}}}
 "Language Servers{{{
 "Visit https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md

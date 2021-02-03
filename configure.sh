@@ -1,7 +1,10 @@
 # symlink repo to home directory
 ln -s $HOME/dotfiles/.bashrc $HOME
 ln -s $HOME/dotfiles/.tmux.conf $HOME
-ln -s $HOME/dotfiles/.config $HOME
+
+
+mkdir -p $HOME/.config
+ln -s $HOME/dotfiles/.config/nvim $HOME/.config
 
 # install dependant files using system agnostic package manager
 # Brew? Conda?
