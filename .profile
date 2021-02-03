@@ -1,3 +1,0 @@
-EDITOR=vim
-VISUAL=vim
-BROWSER=surf
