@@ -50,6 +50,9 @@ nnoremap <silent> <leader>du :call BuildCmake("duck")<CR>
 "turn into latex math equation
 nnoremap  <leader>$ g@iW$
 
+"toggle spellcheck
+nnoremap <silent> <leader>ts :setlocal spell!<CR>
+
 "sums up a series of operations
 ino <C-A> <C-O>yiW<End>=<C-R>=<C-R>0<CR>
 
