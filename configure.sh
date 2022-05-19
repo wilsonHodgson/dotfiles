@@ -15,32 +15,28 @@ ln -s $HOME/dotfiles/.config/nvim $HOME/.config
 # autotools
 # bash
 # clang
+# gcc
 # pandoc
-# tcc ?
 # hugo
 # lvm
 # nmap
 # texlive
-# tmux???
+# tmux
 # xclip
 
 # DESKTOP
 # firefox
 # thunderbird
-# Gnome3
-# Pop-shell (gnome extension)
 # RSS Gaurd
-# SimpleScreenRecorder?
-# Spotify?
-# bluez?
-# flatpak?
+# Spotify
+# bluez
+# flatpak
 # raylib
-# Remmina
 # GIMP
-# kdenlive
 
 # FULL
 # Blender
+# kdenlive
 # .net core?
 # Mesa
 # vulcan

@@ -10,14 +10,19 @@ endfunction
 command! -nargs=1 OpenFile	:call OpenFile(<f-args>)
 
 function CompileLatex()
-	!xelatex %
-	!rm %:r.log %:r.aux %:r.out
-	!xdg-open %:r.pdf
+	let l:fname = fnameescape(expand('%:t:r'))
+	let l:dir = fnameescape(expand('%:p:h'))
+
+	let l:cmd = printf("!cd %s && xelatex %s.tex \n", l:dir, l:fname)
+	let l:cmd .= printf("!cd %s && rm %s.log %s.aux %s.out \n", l:dir, l:fname, l:fname, l:fname)
+	let l:cmd .= printf("!cd %s && xdg-open %s.pdf ", l:dir, l:fname)
+
+	execute cmd
 endfunction
 
 function CompileMarkdown()
-	!pandoc % --pdf-engine=xelatex -o %:r.pdf
-	!xdg-open %:r.pdf
+	!pandoc % --pdf-engine=xelatex -o "%":p:r.pdf
+	!xdg-open "%":p:r.pdf
 endfunction
 
 function BuildCMS()
@@ -46,6 +51,9 @@ nnoremap <silent> <leader>cl :call CompileLatex()<CR>
 nnoremap <silent> <leader>cm :call CompileMarkdown()<CR>
 nnoremap <silent> <leader>bc :call BuildCmake("")<Left><Left>
 nnoremap <silent> <leader>du :call BuildCmake("duck")<CR>
+
+""cut a line, but don't include the newline in the default register
+nnoremap <silent> dD g0y$<End>"_dd<End>
 
 "turn into latex math equation
 nnoremap  <leader>$ g@iW$
@@ -76,6 +84,8 @@ Plug 'cocopon/pgmnt.vim'
 Plug 'junegunn/seoul256.vim'
 Plug '/home/wilson/Projects/Vim-ColorSchemes/topsoil'
 Plug 'clktmr/vim-gdscript3'
+
+Plug 'wilsonHodgson/vim_tts_interface'
 
 call plug#end()
 "}}}
@@ -116,12 +126,15 @@ local on_attach_vim = function(_, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 end
 
+local pid = vim.fn.getpid()
+local omnisharp_bin = "/home/wilson/Omnisharp/run"
+
 require'lspconfig'.pyls.setup{on_attach=on_attach_vim, cmd = {"pyls"}, filetypes = {"python"}}
-require'lspconfig'.omnisharp.setup{on_attach=on_attach_vim}
+require'lspconfig'.omnisharp.setup{on_attach=on_attach_vim, cmd = {omnisharp_bin, "--languageserver", "--hostPID", tostring(pid)}}
 require'lspconfig'.jdtls.setup{on_attach=on_attach_vim}
 
 require'lspconfig'.html.setup{on_attach=on_attach_vim}
-require'lspconfig'.cssls.setup{on_attach=on_attach_vim} --doesn't work
+require'lspconfig'.cssls.setup{on_attach=on_attach_vim}
 require'lspconfig'.tsserver.setup{on_attach=on_attach_vim}
 
 -- lua is the only one that doesn't work at all right now
