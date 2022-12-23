@@ -21,8 +21,14 @@ function CompileLatex()
 endfunction
 
 function CompileMarkdown()
-	!pandoc % --pdf-engine=xelatex -o "%":p:r.pdf
-	!xdg-open "%":p:r.pdf
+	let l:fname = fnameescape(expand('%:t:r'))
+	let l:dir = fnameescape(expand('%:p:h'))
+
+	let l:cmd = printf("!cd %s && pandoc --pdf-engine=xelatex %s.md -o %s.pdf \n", l:dir, l:fname, l:fname)
+	let l:cmd .= printf("!cd %s && rm %s.log %s.aux %s.out \n", l:dir, l:fname, l:fname, l:fname)
+	let l:cmd .= printf("!cd %s && xdg-open %s.pdf ", l:dir, l:fname)
+
+	execute cmd
 endfunction
 
 function BuildCMS()
@@ -77,6 +83,7 @@ Plug 'tpope/vim-commentary'
 Plug 'godlygeek/tabular'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
+Plug 'vimwiki/vimwiki'
 
 Plug 'cocopon/colorswatch.vim'
 Plug 'cocopon/inspecthi.vim'

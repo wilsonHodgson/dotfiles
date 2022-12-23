@@ -1,10 +1,7 @@
-# symlink repo to home directory
-ln -s $HOME/dotfiles/.bashrc $HOME
-ln -s $HOME/dotfiles/.tmux.conf $HOME
+stow --target=$HOME dotfiles
 
-
-mkdir -p $HOME/.config
-ln -s $HOME/dotfiles/.config/nvim $HOME/.config
+##Download Vim-Plugged and place it within nvim autoload directory
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # install dependant files using system agnostic package manager
 # Brew? Conda?
