@@ -1,4 +1,4 @@
-stow --target=$HOME dotfiles
+stow --target=$HOME --dir=$HOME/dotfiles configs
 
 ##Download Vim-Plugged and place it within nvim autoload directory
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
