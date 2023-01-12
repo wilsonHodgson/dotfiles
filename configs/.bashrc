@@ -150,4 +150,5 @@ export EDITOR=/usr/bin/nvim
 export VISUAL=/usr/bin/nvim
 
 export PLEX="snap.plexmediaserver.plexmediaserver.service"
-
+export DOTNET_ROOT=$HOME/.dotnet
+export PATH=$PATH:$DOTNET_ROOT:$HOME/.dotnet/tools
